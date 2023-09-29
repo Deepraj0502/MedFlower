@@ -1,0 +1,14 @@
+{
+    "builds": [
+      {
+        "src": "flower_detection/wsgi.py",
+        "use": "@vercel/python"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "flower_detection/wsgi.py"
+      }
+    ]
+}
