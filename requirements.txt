@@ -1,5 +1,0 @@
-django
-tensorflow
-matplotlib
-keras
-PIL
