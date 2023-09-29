@@ -1,0 +1,8 @@
+django
+tensorflow
+tensorflow.keras.models
+tensorflow.keras.preprocessing.image
+matplotlib.pyplot
+keras.preprocessing
+keras
+PIL
