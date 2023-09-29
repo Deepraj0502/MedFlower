@@ -1,0 +1,60 @@
+from django.http import HttpResponse
+from django.shortcuts import HttpResponse
+import numpy as np
+import matplotlib.pyplot as plt
+from tensorflow.keras.models import load_model
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
+from keras.preprocessing import image
+import tensorflow as tf
+from django.shortcuts import render, redirect
+import os
+from .form import ImageForm
+from .models import Image
+import requests
+from PIL import Image
+import shutil
+import urllib
+
+# Create your views here.
+
+# load model
+savedModel = load_model("detect/Model.h5")
+
+
+def home(request):
+    return render(request, "index.html")
+
+def mediuse(request):
+    content={}
+     # Creating list for mapping
+    list_ = ['Daisy', 'Danelion', 'Rose', 'sunflower', 'tulip']
+    
+    test_image = image.load_img("image.jpg", target_size=(224, 224))
+
+    # For show image
+    plt.imshow(test_image)
+    test_image = image.img_to_array(test_image)
+    test_image = np.expand_dims(test_image, axis=0)
+
+    # Result array
+    result = savedModel.predict(test_image)
+
+    # Mapping result array with the main name list
+    i = 0
+    for i in range(len(result[0])):
+        if(result[0][i] == 1):
+            print(list_[i])
+            content['name'] = list_[i]
+            break
+    return render(request, "mediuse.html",content)
+
+def info(request):
+    img_url = request.POST.get("url")
+    print(img_url)
+    response = requests.get(img_url)
+    if response.status_code:
+        fp = open('image.jpg', 'wb')
+        fp.write(response.content)
+        fp.close()
+    return render(request,"mediuse.html")
+
