@@ -1,65 +1,170 @@
 {% load static%}
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <style>
-          * {
-              margin: 0;
-              padding: 0;
-            }
-            body {
-              background-image: url("https://ik.imagekit.io/ok2wgebfs/background.png?updatedAt=1696095809542");
-              background-size: cover;
-              background-position: center;
-            }
-            .navbar {
-              display: flex;
-              justify-content: left;
-              gap: 60px;
-              position: absolute;
-              padding: 30px;
-              padding-left: 80px;
-            }
-            .navbar button {
-              background: none;
-              border: none;
-              color: #444341;
-              font-weight: bold;
-              letter-spacing: 2px;
-              cursor: pointer;
-            }
-            .mediuse-outer{
-              width: 100vw;
-              height: 100vh;
-              overflow: hidden;
-              display: flex;
-            }
-            .mediuse-image{
-              width: 40%;
-            }
-            .mediuse-content{
-              width: 60%;
-            }
-      </style>
-        <script>
-            window.onload(function(){
-                window.location.reload();
-            })
-        </script>
-    </head>
-    <body>
-        <div class="mediuse-outer">
-            <div class="mediuse-image">
-
-            </div>
-            <div class="mediuse-content">
-              <h1>{{name}}</h1>
-            </div>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>MedFlower</title>
+    <meta name="description" content="" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lora:wght@500&family=Poppins:wght@100;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap"
+      rel="stylesheet"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        background-image: url("https://ik.imagekit.io/ok2wgebfs/background.png?updatedAt=1696095809542");
+        background-size: cover;
+        background-position: center;
+      }
+      .navbar {
+        display: flex;
+        justify-content: left;
+        gap: 60px;
+        position: absolute;
+        padding: 30px;
+        padding-left: 80px;
+      }
+      .navbar button {
+        background: none;
+        border: none;
+        color: #444341;
+        font-weight: bold;
+        letter-spacing: 2px;
+        cursor: pointer;
+      }
+      .mediuse-outer {
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+        display: flex;
+      }
+      .mediuse-image {
+        width: 40%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .mediuse-content {
+        width: 60%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .mediuse-flower {
+        width: 80%;
+        height: 80%;
+        object-fit: cover;
+        border: 8px solid white;
+        box-shadow: 0px 0px 8px 0px darkgray;
+      }
+      .mediuse-inner-div {
+        width: 88%;
+        height: 80%;
+        background: white;
+        box-shadow: 0px 0px 8px 0px darkgray;
+        border-radius: 5px;
+        padding: 8px;
+        padding-left: 30px;
+        padding-right: 30px;
+      }
+      .mediuse-inner-div h1{
+        font-family: "Lora", serif;
+        color: #333333;
+        letter-spacing: 3px;
+        margin-top:20px;
+        margin-left: 20px;
+        text-transform: capitalize;
+      }
+      .mediuse-inner-div p{
+        font-family: "Lora", serif;
+        color: chocolate;
+        margin-top: 20px;
+        margin-left: 20px;
+        line-height: 25px;
+      }
+      .mediuse-inner-div ul li{
+        font-family: "Lora", serif;
+        color: chocolate;
+        margin-left: 35px;
+        margin-top:10px;
+      }
+      @media (max-width: 900px) {
+        .mediuse-outer {
+          flex-direction: column;
+          align-items:center;
+        }
+        .mediuse-image {
+          width: 80%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-top: 20%;
+      }
+      .mediuse-flower {
+        width: 100%;
+        height: 400px;
+    }
+    .mediuse-content{
+      width:85%;
+    }
+    .mediuse-inner-div {
+      width: 100%;
+    height: 85%;
+    background: white;
+    box-shadow: 0px 0px 8px 0px darkgray;
+    border-radius: 5px;
+    padding: 8px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 100px;
+    margin-top: 106px;
+  }
+  .mediuse-outer {
+    overflow: scroll;
+  }
+  
+      }
+    </style>
+    <script>
+      window.onload(function () {
+        window.location.reload();
+      });
+    </script>
+  </head>
+  <body>
+    <div class="mediuse-outer">
+      <div class="mediuse-image">
+        <img src="{{image}}" alt="" class="mediuse-flower" />
+      </div>
+      <div class="mediuse-content">
+        <div class="mediuse-inner-div">
+          <h1 id="name">{{name}}</h1>
+          <div id="info">
+          </div>
         </div>
-    </body>
+      </div>
+    </div>
+    <script>
+      if(document.getElementById("name").innerHTML==="Rose"){
+        document.getElementById("info").innerHTML="<p>Roses (Rosa spp.) have been valued for their beauty and fragrance for centuries, but they also have several potential medical uses. It's important to note that while roses have been traditionally used in herbal medicine, scientific research on their medical benefits is still in the early stages, and more studies are needed to establish their efficacy. Here are some of the potential medical uses of roses based on traditional and preliminary research:</p> <br> <ul> <li>Skin Care: Rose water and rose oil are often used in cosmetics and skin care products due to their natural astringent properties. They can help tighten and tone the skin, reduce redness, and soothe irritated skin.</li> <li>Digestive Health: Rose tea, made from the petals of the rose flower, is believed to have mild laxative properties and can be used to relieve constipation. It is also thought to have a calming effect on the digestive system.</li> <li>Respiratory Health: In traditional medicine, roses have been used to alleviate symptoms of respiratory conditions such as asthma and bronchitis. The inhalation of rose oil vapors is believed to be beneficial for respiratory health.</li> <li>Anti-inflammatory Properties: Some studies suggest that roses may have anti-inflammatory properties, which could be beneficial in the treatment of inflammatory conditions. However, more research is needed in this area.</li> <li>Stress and Anxiety Reduction: The aroma of roses is often associated with relaxation. Rose oil is used in aromatherapy to reduce stress and anxiety. The scent is thought to have a calming effect on the nervous system.</li> </ul>"
+      }
+      else if(document.getElementById("name").innerHTML==="sunflower"){
+        document.getElementById("info").innerHTML="<p> Sunflowers (Helianthus annuus) have various medical uses and health benefits, primarily derived from their seeds and oil. Here are some of the key medical uses and health benefits associated with sunflowers:</p> <br> <ul> <li>Nutritional Benefits: Sunflower seeds are a good source of essential nutrients, including vitamin E, magnesium, selenium, and several phytochemicals. These nutrients are important for overall health and well-being.</li> <li>Heart Health: Sunflower oil, extracted from sunflower seeds, is low in saturated fat and high in unsaturated fats, particularly linoleic acid, which can help reduce bad cholesterol levels, thus promoting heart health.</li> <li>Anti-inflammatory Properties: Sunflower oil contains compounds with anti-inflammatory effects. Consuming foods rich in this oil may help in reducing inflammation in the body, which is associated with various chronic diseases.</li> <li>Skin Health: Sunflower oil can be used topically to moisturize the skin. It is rich in vitamin E, which is known for its antioxidant properties, helping to prevent damage to the skin caused by free radicals. It is often used in skincare products.</li> <li>Digestive Health: Sunflower seeds are a good source of dietary fiber, which aids in digestion and promotes a healthy digestive system. Adequate fiber intake is important for preventing constipation and promoting regular bowel movements.</li> </ul>";
+      }
+    </script>
+  </body>
 </html>

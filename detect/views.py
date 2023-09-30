@@ -16,6 +16,7 @@ import shutil
 import urllib
 
 # Create your views here.
+img_url=""
 
 # load model
 savedModel = load_model("detect/Model.h5")
@@ -25,6 +26,7 @@ def home(request):
     return render(request, "index.html")
 
 def mediuse(request):
+    global img_url
     content={}
      # Creating list for mapping
     list_ = ['Daisy', 'Danelion', 'Rose', 'sunflower', 'tulip']
@@ -46,9 +48,11 @@ def mediuse(request):
             print(list_[i])
             content['name'] = list_[i]
             break
+    content['image'] = img_url
     return render(request, "mediuse.html",content)
 
 def info(request):
+    global img_url
     img_url = request.POST.get("url")
     print(img_url)
     response = requests.get(img_url)
