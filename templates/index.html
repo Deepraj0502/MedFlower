@@ -45,7 +45,7 @@
             url: "info",
             data: { url: url, csrfmiddlewaretoken: csrftoken },
             success: function (data) {
-              window.location.href = "/mediuse";
+              window.location.pathname = "/mediuse";
             },
             error: function (data) {},
           });
