@@ -1,0 +1,1 @@
+web: gunicorn flower_detection.wsgi --log-file -
