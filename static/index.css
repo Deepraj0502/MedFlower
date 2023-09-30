@@ -26,6 +26,8 @@ body {
   letter-spacing: 2px;
   cursor: pointer;
 }
+
+/* Index Page */
 .flower-image-outer {
   width: 100%;
   height: 100%;
@@ -143,19 +145,6 @@ body {
   padding: 12px 20px;
   border-radius: 4px;
 }
-/* .identify-btn{
-    width: 44%;
-    margin-top: 25px;
-    height: 46px;
-    border-radius: 5px;
-    border: none;
-    background: #d68ea0;
-    color: white;
-    cursor: pointer;
-    font-size: 16px;
-    letter-spacing: 2px;
-  }
-   */
 .identify-btn {
   position: relative;
   padding: 15px 45px;
@@ -324,4 +313,19 @@ body {
   .identify-btn{
     width: 100%;
   }
+}
+
+
+/* Mediuse */
+.mediuse-outer{
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+}
+.mediuse-image{
+  width: 40%;
+}
+.mediuse-content{
+  width: 60%;
 }

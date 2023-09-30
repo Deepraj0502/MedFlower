@@ -7,7 +7,45 @@
         <title></title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href={% static 'home.css' %}>
+        <style>
+          * {
+              margin: 0;
+              padding: 0;
+            }
+            body {
+              background-image: url("https://ik.imagekit.io/ok2wgebfs/background.png?updatedAt=1696095809542");
+              background-size: cover;
+              background-position: center;
+            }
+            .navbar {
+              display: flex;
+              justify-content: left;
+              gap: 60px;
+              position: absolute;
+              padding: 30px;
+              padding-left: 80px;
+            }
+            .navbar button {
+              background: none;
+              border: none;
+              color: #444341;
+              font-weight: bold;
+              letter-spacing: 2px;
+              cursor: pointer;
+            }
+            .mediuse-outer{
+              width: 100vw;
+              height: 100vh;
+              overflow: hidden;
+              display: flex;
+            }
+            .mediuse-image{
+              width: 40%;
+            }
+            .mediuse-content{
+              width: 60%;
+            }
+      </style>
         <script>
             window.onload(function(){
                 window.location.reload();
@@ -15,6 +53,13 @@
         </script>
     </head>
     <body>
-        <h1>{{name}}</h1>
+        <div class="mediuse-outer">
+            <div class="mediuse-image">
+
+            </div>
+            <div class="mediuse-content">
+              <h1>{{name}}</h1>
+            </div>
+        </div>
     </body>
 </html>
