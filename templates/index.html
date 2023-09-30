@@ -43,9 +43,10 @@
           $.ajax({
             method: "POST",
             url: "info",
+            headers: {  'Access-Control-Allow-Origin': 'https://medflower.up.railway.app/' },
             data: { url: url, csrfmiddlewaretoken: csrftoken },
             success: function (data) {
-              window.location.pathname = "/mediuse";
+              window.location.href = "/mediuse";
             },
             error: function (data) {},
           });
