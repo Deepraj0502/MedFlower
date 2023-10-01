@@ -37,31 +37,33 @@
         }
         return cookieValue;
       }
-      const csrftoken = getCookie('csrftoken');
+      const csrftoken = getCookie("csrftoken");
       console.log(document.cookie);
       console.log(csrftoken);
       function csrfSafeMethod(method) {
         // these HTTP methods do not require CSRF protection
-        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-    }
-    
-    // Function to set Request Header with `CSRFTOKEN`
-    function setRequestHeader(){
+        return /^(GET|HEAD|OPTIONS|TRACE)$/.test(method);
+      }
+
+      // Function to set Request Header with `CSRFTOKEN`
+      function setRequestHeader() {
         $.ajaxSetup({
-            beforeSend: function(xhr, settings) {
-                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
-                }
+          beforeSend: function (xhr, settings) {
+            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+              xhr.setRequestHeader("X-CSRFToken", csrftoken);
             }
+          },
         });
-    }
+      }
       window.passData = (url) => {
         setRequestHeader();
         $(document).ready(function () {
           $.ajax({
             method: "POST",
             url: "https://medflower.up.railway.app/info",
-            headers: {  'Access-Control-Allow-Origin': 'https://medflower.up.railway.app' },
+            headers: {
+              "Access-Control-Allow-Origin": "https://medflower.up.railway.app",
+            },
             data: { url: url },
             success: function (data) {
               window.location.href = "/mediuse";
@@ -94,22 +96,22 @@
       window.url = "";
 
       window.uploadImage = async () => {
-        document.getElementById("select").innerHTML="UPLOADING...";
+        document.getElementById("select").innerHTML = "UPLOADING...";
         var image = document.getElementById("file");
         const imageRef2 = ref(storage, image.files[0].name);
         uploadBytes(imageRef2, image.files[0], "image").then(() => {
           getDownloadURL(imageRef2).then((url5) => {
-            window.url=url5;
-            document.getElementById("select").innerHTML="UPLOADED";
-            document.getElementById("select").style.color="#33cc33";
-            document.getElementById("select").style.fontWeight="bold";
+            window.url = url5;
+            document.getElementById("select").innerHTML = "UPLOADED";
+            document.getElementById("select").style.color = "#33cc33";
+            document.getElementById("select").style.fontWeight = "bold";
           });
         });
       };
 
-      window.handleClick = () =>{
+      window.handleClick = () => {
         window.passData(window.url);
-      }
+      };
 
       const dropArea = document.querySelector(".drop_box"),
         button = document.getElementById("choose"),
@@ -199,7 +201,7 @@
           left: 70%;
         }
       }
-      .card {
+      .drop-card {
         border-radius: 10px;
         box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.3);
         width: 100%;
@@ -207,10 +209,10 @@
         background-color: #ffffff;
         padding: 10px 30px 40px;
         margin-top: 20px;
-        margin-left: -30px;
+        margin-left:-30px;
       }
 
-      .card h3 {
+      .drop-card h3 {
         font-size: 22px;
         font-weight: 600;
         font-family: "Lora", serif;
@@ -400,29 +402,189 @@
         width: 90%;
         margin: auto;
       }
-      .about-box h1{
-        text-align:center;
-        color:#d68ea0;
-        font-family: "Lora", serif;
-        font-size:2.5rem;
+      .team-box {
+        width: 90%;
+        margin: auto;
       }
-      .about-box p{
+      .about-box h1 {
+        text-align: center;
+        color: #d68ea0;
+        font-family: "Lora", serif;
+        font-size: 2.5rem;
+      }
+      .team-box h1 {
+        text-align: center;
+        color: #d68ea0;
+        font-family: "Lora", serif;
+        font-size: 2.5rem;
+      }
+      .about-box p {
         margin-top: 20px;
         font-size: 1.2rem;
         line-height: 25px;
         font-family: math;
         text-align: justify;
       }
-      .about-image{
-        display:flex;
-        width:100%;
-        justify-content:space-between;
+      .about-image {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        margin-top: 20px;
+        margin-bottom:50px;
+      }
+      .team-image {
+        display: flex;
+        width: 100%;
+        justify-content: space-evenly;
+        margin-top: 20px;
+        margin-bottom:50px;
+        flex-wrap:wrap;
+      }
+      .about-image img {
+        width: 300px;
+        height: 350px;
+        border: 8px solid white;
+        object-fit:cover;
+        box-shadow: 0px 0px 8px 0px darkgray;
+      }
+      .card {
+        position: relative;
+        width: 250px;
+        height: 300px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 20px;
         margin-top:20px;
       }
-      .about-image img{
-        width:300px;
-        height:350px;
-        border:8px solid white;
+
+      .card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+        background-image: linear-gradient(
+          144deg,
+          #af40ff,
+          #5b42f3 50%,
+          #00ddeb
+        );
+        border-radius: 20px;
+      }
+
+      .card::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        filter: blur(30px);
+        border-radius: 20px;
+      }
+
+      .card b {
+        position: absolute;
+    inset: 6px;
+    background: url(https://ik.imagekit.io/ok2wgebfs/WhatsApp%20Image%202023-10-01%20at%2011.58.40%20AM.jpeg?updatedAt=1696143653149);
+    z-index: 2;
+    border-radius: 20px;
+    background-size: cover;
+    background-position: center;
+      }
+
+      .card img {
+        position: absolute;
+        z-index: 3;
+        scale: 0.8;
+        opacity: 0.25;
+        transition: 0.5s;
+      }
+
+      .card:hover img {
+        scale: 0.5;
+        opacity: 0.9;
+        transform: translateY(-70px);
+      }
+
+      .card .content {
+        position: absolute;
+        z-index: 3;
+        bottom: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transform: scale(0);
+        transition: 0.5s;
+      }
+
+      .card:hover .content {
+        transform: scale(1);
+        bottom: 25px;
+      }
+      .card:hover b{
+        opacity:80%;
+      }
+
+      .content .title {
+        position: relative;
+    color: chocolate;
+    font-weight: bolder;
+    line-height: 1em;
+    font-size: 1.3em;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-align: center;
+    font-family: math;
+      }
+
+      .content .title span {
+        font-weight: 300;
+        font-size: 0.7em;
+      }
+
+      .content .sci {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        margin-top: 5px;
+      }
+
+      .sci li {
+        list-style: none;
+      }
+
+      .sci li .fa-brands {
+        width: 14px;
+      }
+
+      .sci li .fa-facebook {
+        width: 10px;
+      }
+
+      .sci li a {
+        position: relative;
+        text-decoration: none;
+        color: rgba(255, 255, 255, 0.5);
+        background: rgba(0, 0, 0, 0.2);
+        fill: currentColor;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 4px;
+        transition: 0.5s;
+      }
+
+      .sci li a:hover {
+        fill: currentColor;
+        color: rgba(255, 255, 255, 1);
       }
 
       @media (max-width: 900px) {
@@ -431,7 +593,7 @@
         }
         .flower-image-outer {
           flex-direction: column;
-          height:max-content;
+          height: max-content;
           margin-top: 20%;
         }
         .flower-img {
@@ -455,7 +617,7 @@
         }
         body {
           background-position: right;
-          background-size:contain;
+          background-size: contain;
         }
         .drop_box p {
           font-size: 8px;
@@ -466,14 +628,18 @@
         .identify-btn {
           width: 100%;
         }
-        .about-box h1{
-          font-size:1.8rem;
-          margin-top:50px;
+        .about-box h1 {
+          font-size: 1.8rem;
+          margin-top: 50px;
         }
-        .about-image{
-          flex-wrap:wrap;
-          gap:15px;
-          justify-content:center;
+        .team-box h1 {
+          font-size: 1.8rem;
+          margin-top: 50px;
+        }
+        .about-image {
+          flex-wrap: wrap;
+          gap: 15px;
+          justify-content: center;
         }
       }
     </style>
@@ -494,27 +660,30 @@
         <h1>MEDFLOWER</h1>
         <p>cure for love</p>
         <div class="container">
-          <div class="card">
+          <div class="drop-card">
             <div class="drop_box">
               <header>
                 <h4 id="select">Select File here</h4>
               </header>
               <form action="#" method="post">
-              {% csrf_token %}
-              <p>Files Supported: JPEG, PNG, JPG</p>
-              <input
-                type="file"
-                name="file"
-                id="file"
-                onchange="window.uploadImage()"
-                style="display: none"
-              />
-              <button class="btn" type="button" id="choose">Choose File</button>
+                {% csrf_token %}
+                <p>Files Supported: JPEG, PNG, JPG</p>
+                <input
+                  type="file"
+                  name="file"
+                  id="file"
+                  onchange="window.uploadImage()"
+                  style="display: none"
+                />
+                <button class="btn" type="button" id="choose">
+                  Choose File
+                </button>
               </form>
             </div>
           </div>
         </div>
-        {% comment %} <button class="identify-btn">Identify</button> {%endcomment %}
+        {% comment %}
+        <button class="identify-btn">Identify</button> {%endcomment %}
         <button class="identify-btn" onclick="window.handleClick()">
           IDENTIFY
           <div class="icon-1">
@@ -626,10 +795,221 @@
         bloom meets the cure.
       </p>
       <div class="about-image">
-        <img src="" alt=""/>
-        <img src="" alt=""/>
-        <img src="" alt=""/>
-        <img src="" alt=""/>
+        <img src="https://images.unsplash.com/photo-1562690868-60bbe7293e94?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cm9zZSUyMGZsb3dlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80" alt="" />
+        <img src="https://images.unsplash.com/photo-1616156194103-ab9d45e33915?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE4fHx8ZW58MHx8fHx8&w=1000&q=80" alt="" />
+        <img src="https://i.pinimg.com/736x/39/da/a6/39daa6e9a23d95e8fcd89ac5d84fc67a.jpg" alt="" />
+        <img src="https://media.istockphoto.com/id/1393708668/photo/tulips.jpg?s=612x612&w=0&k=20&c=2IiIIpfUdAZl3nzJkzIRtaO42-JAlcPf7gN4Kk6nCUE=" alt="" />
+      </div>
+    </div>
+    <div class="team-box">
+      <h1>Our Team</h1>
+      <div class="team-image">
+        {% comment %} Card1 {% endcomment %}
+        <div class="card">
+          <b></b>
+          <div class="content">
+            <p class="title">Deepraj Pagare<br /><span>Web Developer</span></p>
+            <ul class="sci">
+              <li>
+                <a href="#">
+                  <svg
+                    class="fa-brands fa-facebook"
+                    width="20"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 320 512"
+                  >
+                    <path
+                      d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"
+                    ></path>
+                  </svg>
+                </a>
+              </li>
+
+              <li>
+                <a href="#">
+                  <svg
+                    class="fa-brands fa-twitter"
+                    width="24"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 512 512"
+                  >
+                    <path
+                      d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"
+                    ></path>
+                  </svg>
+                </a>
+              </li>
+
+              <li>
+                <a href="#">
+                  <svg
+                    class="fa-brands fa-linkedin-in"
+                    width="24"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 448 512"
+                  >
+                    <path
+                      d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"
+                    ></path>
+                  </svg>
+                </a>
+              </li>
+
+              <li>
+                <a href="#">
+                  <svg
+                    class="fa-brands fa-instagram"
+                    width="24"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 448 512"
+                  >
+                    <path
+                      d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"
+                    ></path>
+                  </svg>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        {% comment %} Card1 {% endcomment %}
+        <div class="card">
+          <b></b>
+          <div class="content">
+            <p class="title">Deepraj Pagare<br /><span>Web Developer</span></p>
+            <ul class="sci">
+              <li>
+                <a href="#">
+                  <svg
+                    class="fa-brands fa-facebook"
+                    width="20"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 320 512"
+                  >
+                    <path
+                      d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"
+                    ></path>
+                  </svg>
+                </a>
+              </li>
+
+              <li>
+                <a href="#">
+                  <svg
+                    class="fa-brands fa-twitter"
+                    width="24"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 512 512"
+                  >
+                    <path
+                      d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"
+                    ></path>
+                  </svg>
+                </a>
+              </li>
+
+              <li>
+                <a href="#">
+                  <svg
+                    class="fa-brands fa-linkedin-in"
+                    width="24"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 448 512"
+                  >
+                    <path
+                      d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"
+                    ></path>
+                  </svg>
+                </a>
+              </li>
+
+              <li>
+                <a href="#">
+                  <svg
+                    class="fa-brands fa-instagram"
+                    width="24"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 448 512"
+                  >
+                    <path
+                      d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"
+                    ></path>
+                  </svg>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        {% comment %} Card1 {% endcomment %}
+        <div class="card">
+          <b></b>
+          <div class="content">
+            <p class="title">Deepraj Pagare<br /><span>Web Developer</span></p>
+            <ul class="sci">
+              <li>
+                <a href="#">
+                  <svg
+                    class="fa-brands fa-facebook"
+                    width="20"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 320 512"
+                  >
+                    <path
+                      d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"
+                    ></path>
+                  </svg>
+                </a>
+              </li>
+
+              <li>
+                <a href="#">
+                  <svg
+                    class="fa-brands fa-twitter"
+                    width="24"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 512 512"
+                  >
+                    <path
+                      d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"
+                    ></path>
+                  </svg>
+                </a>
+              </li>
+
+              <li>
+                <a href="#">
+                  <svg
+                    class="fa-brands fa-linkedin-in"
+                    width="24"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 448 512"
+                  >
+                    <path
+                      d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"
+                    ></path>
+                  </svg>
+                </a>
+              </li>
+
+              <li>
+                <a href="#">
+                  <svg
+                    class="fa-brands fa-instagram"
+                    width="24"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 448 512"
+                  >
+                    <path
+                      d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"
+                    ></path>
+                  </svg>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      </div>
       </div>
     </div>
   </body>
