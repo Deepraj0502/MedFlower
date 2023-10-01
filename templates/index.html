@@ -38,6 +38,8 @@
         return cookieValue;
       }
       const csrftoken = getCookie('csrftoken');
+      console.log(document.cookie);
+      console.log(csrftoken);
       function csrfSafeMethod(method) {
         // these HTTP methods do not require CSRF protection
         return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
@@ -58,8 +60,8 @@
         $(document).ready(function () {
           $.ajax({
             method: "POST",
-            url: "info",
-            headers: {  'Access-Control-Allow-Origin': 'https://medflower.up.railway.app/info' },
+            url: "https://medflower.up.railway.app/info",
+            headers: {  'Access-Control-Allow-Origin': 'https://medflower.up.railway.app' },
             data: { url: url },
             success: function (data) {
               window.location.href = "/mediuse";
@@ -395,8 +397,32 @@
         display: none;
       }
       .about-box {
-        width: 80%;
+        width: 90%;
         margin: auto;
+      }
+      .about-box h1{
+        text-align:center;
+        color:#d68ea0;
+        font-family: "Lora", serif;
+        font-size:2.5rem;
+      }
+      .about-box p{
+        margin-top: 20px;
+        font-size: 1.2rem;
+        line-height: 25px;
+        font-family: math;
+        text-align: justify;
+      }
+      .about-image{
+        display:flex;
+        width:100%;
+        justify-content:space-between;
+        margin-top:20px;
+      }
+      .about-image img{
+        width:300px;
+        height:350px;
+        border:8px solid white;
       }
 
       @media (max-width: 900px) {
@@ -405,6 +431,7 @@
         }
         .flower-image-outer {
           flex-direction: column;
+          height:max-content;
           margin-top: 20%;
         }
         .flower-img {
@@ -427,7 +454,8 @@
           font-size: 1.9rem;
         }
         body {
-          background-position: unset;
+          background-position: right;
+          background-size:contain;
         }
         .drop_box p {
           font-size: 8px;
@@ -437,6 +465,15 @@
         }
         .identify-btn {
           width: 100%;
+        }
+        .about-box h1{
+          font-size:1.8rem;
+          margin-top:50px;
+        }
+        .about-image{
+          flex-wrap:wrap;
+          gap:15px;
+          justify-content:center;
         }
       }
     </style>
@@ -588,6 +625,12 @@
         nurture not just your soul, but also your body. MedFlower: Where the
         bloom meets the cure.
       </p>
+      <div class="about-image">
+        <img src="" alt=""/>
+        <img src="" alt=""/>
+        <img src="" alt=""/>
+        <img src="" alt=""/>
+      </div>
     </div>
   </body>
 </html>
