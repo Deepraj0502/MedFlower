@@ -1,19 +1,9 @@
-from django.http import HttpResponse
-from django.shortcuts import HttpResponse
 import numpy as np
 import matplotlib.pyplot as plt
 from tensorflow.keras.models import load_model
-from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from keras.preprocessing import image
-import tensorflow as tf
-from django.shortcuts import render, redirect
-import os
-from .form import ImageForm
-from .models import Image
+from django.shortcuts import render
 import requests
-from PIL import Image
-import shutil
-import urllib
 
 # Create your views here.
 img_url=""
@@ -29,7 +19,7 @@ def mediuse(request):
     global img_url
     content={}
      # Creating list for mapping
-    list_ = ['Daisy', 'Danelion', 'Rose', 'Sunflower', 'Tulip']
+    list_ = ['Daisy', 'Danelion', 'Rose', 'sunflower', 'tulip']
     
     test_image = image.load_img("image.jpg", target_size=(224, 224))
 
