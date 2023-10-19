@@ -19,7 +19,7 @@ def mediuse(request):
     global img_url
     content={}
      # Creating list for mapping
-    list_ = ['Daisy', 'Danelion', 'Rose', 'sunflower', 'tulip']
+    list_ = ['Daisy', 'Danelion', 'Rose', 'Sunflower', 'Tulip']
     
     test_image = image.load_img("image.jpg", target_size=(224, 224))
 
